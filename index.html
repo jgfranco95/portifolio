@@ -1,323 +1,329 @@
-
-\documentclass[12pt,a4paper]{article}
-
-% Pacotes
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[brazil]{babel}
-\usepackage{geometry}
-\usepackage{forest}
-\usepackage{enumitem}
-\usepackage{setspace}
-\usepackage{titlesec}
-
-% Configurações da página
-\geometry{
-    left=3cm,
-    right=2cm,
-    top=3cm,
-    bottom=2cm
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seu Nome – Portfólio</title>
+<meta name="description" content="Portfólio de Seu Nome. Projetos, sobre mim e contato.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== CORES E FONTES: mude aqui para trocar o visual do site todo ===== */
+:root{
+  --bg:#060813; --ink:#eef0ff; --muted:#9aa3c7; --line:#222a4d;
+  --accent:#8b7cff; --accent2:#3de0ff; --accent-soft:rgba(139,124,255,.14); --card:rgba(14,18,42,.7);
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"DM Sans",system-ui,sans-serif;
+  --max:1080px;
 }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+header,main,footer{position:relative;z-index:1}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+img{max-width:100%;display:block}
 
-\onehalfspacing
-\setlength{\parindent}{1.25cm}
-\setlength{\parskip}{4pt}
+/* Topo */
+header{position:sticky;top:0;z-index:10;background:rgba(6,8,19,.65);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font:800 1.15rem var(--display);text-decoration:none}
+nav{display:flex;gap:22px}
+nav a{text-decoration:none;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--accent)}
 
-\titleformat{\section}
-{\normalfont\bfseries\large}{\thesection.}{0.5em}{}
+/* Hero */
+.hero{padding:96px 0 72px}
+.hero h1{font:800 clamp(2.8rem,9vw,6.5rem)/.98 var(--display);letter-spacing:-.03em;max-width:12ch}
+.hero p{margin-top:28px;max-width:52ch;font-size:1.2rem;color:var(--muted)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#060813}
+.btn.primary:hover{background:var(--accent2);border-color:var(--accent2)}
+.btn.ghost:hover{background:var(--ink);color:#060813}
 
-\begin{document}
+section{padding:72px 0;border-top:1px solid var(--line)}
+.grid{perspective:1000px}
+h2{font:700 clamp(1.8rem,4vw,2.6rem)/1.1 var(--display);letter-spacing:-.02em;margin-bottom:12px}
+.lead{color:var(--muted);max-width:56ch;margin-bottom:40px}
 
-% Capa
-\begin{titlepage}
-    \begin{center}
-        \textbf{FACULDADE / INSTITUIÇÃO DE ENSINO}
+/* Trabalhos */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px}
+.card{background:var(--card);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transform-style:preserve-3d;transition:transform .2s ease-out,border-color .2s,box-shadow .2s;will-change:transform}
+.card:hover{border-color:var(--accent);box-shadow:0 20px 50px -20px rgba(139,124,255,.5)}
+.thumb{aspect-ratio:4/3;background:var(--accent-soft);display:grid;place-items:center;border-bottom:1px solid var(--line);overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.slot{display:grid;place-items:center;text-align:center;gap:4px;width:calc(100% - 32px);height:calc(100% - 32px);border:2px dashed var(--accent);border-radius:12px;color:var(--accent);font-weight:700;padding:12px}
+.slot small{font-weight:400;color:var(--muted)}
+.card .body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font:700 1.3rem/1.2 var(--display)}
+.card p{color:var(--muted);font-size:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.tags span{font-size:.85rem;padding:3px 12px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:500}
+.links{display:flex;gap:18px;font-weight:700;padding-top:6px}
+.links a{color:var(--accent)}
 
-        \vspace{3cm}
+/* Sobre */
+.about{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:start}
+.photo{aspect-ratio:1;border-radius:24px;background:var(--accent-soft);border:2px dashed var(--accent);display:grid;place-items:center;text-align:center;color:var(--accent);font-weight:700;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+.about p+p{margin-top:16px}
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.skills span{border:1.5px solid var(--ink);border-radius:999px;padding:5px 16px;font-weight:500}
 
-        \textbf{\large ESTRUTURA DE DADOS}
+/* Contato */
+.contact{background:var(--card);backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--ink);border-radius:28px;padding:56px 40px;margin:72px 0}
+footer{padding:0 0 40px;color:var(--muted);font-size:.95rem}
 
-        \vspace{0.5cm}
-
-        \textbf{4º BIMESTRE -- ATIVIDADE 1}
-
-        \vspace{3cm}
-
-        \begin{flushleft}
-            \textbf{Aluno:} \hrulefill
-
-            \vspace{0.7cm}
-
-            \textbf{Professor(a):} \hrulefill
-
-            \vspace{0.7cm}
-
-            \textbf{Turma:} \hrulefill
-        \end{flushleft}
-
-        \vfill
-
-        Tatuí -- SP
-
-        \the\year
-    \end{center}
-\end{titlepage}
-
-\section{Situação-problema: como organizar os arquivos de um computador?}
-
-A organização dos arquivos de um computador pode ser
-representada por meio de uma estrutura de árvore, na qual
-existe uma pasta principal que contém outras pastas e
-arquivos. Cada pasta pode possuir subpastas, formando uma
-hierarquia que facilita a localização e a organização dos
-arquivos. Dessa forma, é possível identificar quais pastas
-estão dentro de outras e onde cada arquivo está armazenado.
-
-\section{Questionário}
-
-\begin{enumerate}[label=\alph*)]
-
-    \item Uma lista simples de nomes seria suficiente para
-    mostrar em qual pasta cada arquivo está? O que ficaria
-    faltando?
-
-    Não. Uma lista simples mostraria apenas os nomes dos
-    arquivos e das pastas, mas não apresentaria as relações
-    entre eles. Faltariam informações sobre a localização
-    de cada arquivo e sobre quais pastas estão dentro de
-    outras.
-
-    \item Se ``Disciplinas'' está dentro de ``ADS'', e
-    ``ADS'' está dentro de ``Faculdade'', como podemos
-    representar essa relação?
-
-    Podemos representar essa relação por meio de uma
-    estrutura de árvore, mostrando a hierarquia:
-    Faculdade $\rightarrow$ ADS $\rightarrow$ Disciplinas.
-
-    \item Uma pasta pode conter várias pastas? Uma pasta
-    pode estar diretamente dentro de duas pastas diferentes
-    ao mesmo tempo?
-
-    Sim, uma pasta pode conter várias subpastas. Porém,
-    em uma estrutura de árvore tradicional, uma pasta não
-    pode estar diretamente dentro de duas pastas diferentes
-    ao mesmo tempo, pois cada elemento possui apenas um
-    pai, com exceção da raiz.
-
-    \item Qual é a diferença entre dizer que duas pastas
-    existem e mostrar a relação entre elas?
-
-    Dizer que duas pastas existem apenas informa seus nomes.
-    Mostrar a relação entre elas indica como estão
-    organizadas, por exemplo, se uma pasta está dentro da
-    outra ou se ambas pertencem a uma mesma pasta principal.
-
-    \item Se eu mover uma pasta, quais informações sobre a
-    organização precisam ser atualizadas?
-
-    É necessário atualizar a localização da pasta e de seus
-    arquivos e subpastas, além das relações hierárquicas
-    entre a pasta movida e suas pastas de origem e destino.
-    Também podem precisar de atualização os caminhos
-    utilizados para acessar os arquivos.
-
-\end{enumerate}
-
-\section{Analogias e diagramas}
-
-\subsection{a) Organização de uma empresa}
-
-Uma empresa pode ser organizada em uma hierarquia na qual
-a empresa é o elemento principal, seguida pelos
-departamentos, equipes e funcionários.
-
-\begin{center}
-\begin{forest}
-for tree={
-    draw,
-    rounded corners,
-    align=center,
-    parent anchor=south,
-    child anchor=north,
-    edge={-},
-    l sep=10mm,
-    s sep=5mm,
-    font=\small
+@media (max-width:720px){
+  nav{gap:14px;font-size:.95rem}
+  .about{grid-template-columns:1fr}
+  .photo{max-width:240px}
+  .hero{padding:64px 0 48px}
+  .contact{padding:40px 24px}
 }
-[Empresa
-    [Departamento de TI
-        [Equipe de Suporte
-            [João]
-            [Pedro]
-        ]
-        [Equipe de Desenvolvimento
-            [Maria]
-        ]
-    ]
-    [Departamento Financeiro
-        [Equipe de Contabilidade
-            [Ana]
-        ]
-    ]
-]
-\end{forest}
-\end{center}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
 
-\subsection{b) Cardápio digital}
+<canvas id="bg" aria-hidden="true"></canvas>
 
-Um cardápio digital pode organizar os produtos por
-categorias e subcategorias, facilitando a localização
-dos itens disponíveis.
+<header>
+  <div class="wrap">
+    <a class="logo" href="#topo">Seu Nome</a>
+    <nav aria-label="Principal">
+      <a href="#trabalhos">Trabalhos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
 
-\begin{center}
-\begin{forest}
-for tree={
-    draw,
-    rounded corners,
-    align=center,
-    parent anchor=south,
-    child anchor=north,
-    edge={-},
-    l sep=10mm,
-    s sep=5mm,
-    font=\small
+<main id="topo">
+  <div class="wrap">
+    <div class="hero">
+      <!-- EDITE: sua frase principal. Diga o que você faz em poucas palavras. -->
+      <h1>Olá, eu sou Seu Nome.</h1>
+      <p>Sou [sua profissão] e crio [o que você faz] para [quem você atende]. Aqui estão alguns dos meus trabalhos.</p>
+      <div class="cta">
+        <a class="btn primary" href="#trabalhos">Ver trabalhos</a>
+        <a class="btn ghost" href="#contato">Falar comigo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TRABALHOS ===================== -->
+  <section id="trabalhos">
+    <div class="wrap">
+      <h2>Trabalhos</h2>
+      <p class="lead">Uma seleção dos projetos mais recentes.</p>
+
+      <div class="grid">
+
+        <!--
+          COMO PREENCHER UM TRABALHO:
+          1. Salve a imagem na pasta "img" (ex.: img/projeto1.jpg)
+          2. Troque o bloco <div class="slot">...</div> por:
+             <img src="img/projeto1.jpg" alt="Descrição da imagem">
+          3. Edite título, descrição, tags e links.
+          Para adicionar mais, copie um <article class="card"> inteiro.
+          Para remover o link de um projeto, apague a linha do <a>.
+        -->
+
+        <article class="card">
+          <div class="thumb">
+            <div class="slot">Imagem do projeto 1<small>proporção 4:3</small></div>
+          </div>
+          <div class="body">
+            <h3>Nome do projeto 1</h3>
+            <p>Descreva em uma ou duas frases o que era o desafio e o que você entregou.</p>
+            <div class="links"><a href="#">Ver projeto</a><a href="#">Código</a></div>
+            <div class="tags"><span>Tag</span><span>Tag</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <div class="slot">Imagem do projeto 2<small>proporção 4:3</small></div>
+          </div>
+          <div class="body">
+            <h3>Nome do projeto 2</h3>
+            <p>Descreva em uma ou duas frases o que era o desafio e o que você entregou.</p>
+            <div class="links"><a href="#">Ver projeto</a></div>
+            <div class="tags"><span>Tag</span><span>Tag</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <div class="slot">Imagem do projeto 3<small>proporção 4:3</small></div>
+          </div>
+          <div class="body">
+            <h3>Nome do projeto 3</h3>
+            <p>Descreva em uma ou duas frases o que era o desafio e o que você entregou.</p>
+            <div class="links"><a href="#">Ver projeto</a></div>
+            <div class="tags"><span>Tag</span><span>Tag</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <div class="slot">Imagem do projeto 4<small>proporção 4:3</small></div>
+          </div>
+          <div class="body">
+            <h3>Nome do projeto 4</h3>
+            <p>Descreva em uma ou duas frases o que era o desafio e o que você entregou.</p>
+            <div class="links"><a href="#">Ver projeto</a></div>
+            <div class="tags"><span>Tag</span><span>Tag</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <div class="slot">Imagem do projeto 5<small>proporção 4:3</small></div>
+          </div>
+          <div class="body">
+            <h3>Nome do projeto 5</h3>
+            <p>Descreva em uma ou duas frases o que era o desafio e o que você entregou.</p>
+            <div class="links"><a href="#">Ver projeto</a></div>
+            <div class="tags"><span>Tag</span><span>Tag</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <div class="slot">Imagem do projeto 6<small>proporção 4:3</small></div>
+          </div>
+          <div class="body">
+            <h3>Nome do projeto 6</h3>
+            <p>Descreva em uma ou duas frases o que era o desafio e o que você entregou.</p>
+            <div class="links"><a href="#">Ver projeto</a></div>
+            <div class="tags"><span>Tag</span><span>Tag</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SOBRE ===================== -->
+  <section id="sobre">
+    <div class="wrap">
+      <div class="about">
+        <!-- Para colocar sua foto, troque o texto por: <img src="img/foto.jpg" alt="Foto de Seu Nome"> -->
+        <div class="photo">Sua foto aqui</div>
+        <div>
+          <h2>Sobre mim</h2>
+          <p>Escreva aqui um parágrafo curto: quem você é, onde mora e há quanto tempo trabalha com o que faz.</p>
+          <p>Em outro parágrafo, conte o que te motiva e como você gosta de trabalhar com clientes ou equipes.</p>
+          <div class="skills" aria-label="Habilidades">
+            <span>Habilidade 1</span><span>Habilidade 2</span><span>Habilidade 3</span><span>Habilidade 4</span><span>Habilidade 5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTATO ===================== -->
+  <div class="wrap">
+    <section id="contato" class="contact" style="border-top:0">
+      <h2>Vamos conversar?</h2>
+      <p class="lead">Conte sobre o seu projeto e eu respondo em até dois dias úteis.</p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:seuemail@exemplo.com">seuemail@exemplo.com</a>
+        <a class="btn ghost" href="https://github.com/jgfranco95">GitHub</a>
+        <a class="btn ghost" href="#">LinkedIn</a>
+        <a class="btn ghost" href="https://wa.me/55DDDNUMERO">WhatsApp</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="ano">2026</span> Seu Nome. Todos os direitos reservados.</div>
+</footer>
+
+<script>
+document.getElementById('ano').textContent=new Date().getFullYear();
+
+/* ===== FUNDO 3D DE PARTÍCULAS (sem bibliotecas) =====
+   Para ajustar: PONTOS = quantidade, RAIO = tamanho da esfera, LIGACAO = distância das linhas */
+(function(){
+  var c=document.getElementById('bg'),x=c.getContext('2d');
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var PONTOS=230,RAIO=280,LIGACAO=105,AMBIENTE=70;
+  var W,H,dpr,cx,cy,mx=0,my=0,tx=0,ty=0,ay=0,ax=0,scroll=0,pts=[],amb=[];
+  var ga=Math.PI*(3-Math.sqrt(5));
+  for(var i=0;i<PONTOS;i++){
+    var y=1-2*i/(PONTOS-1),r=Math.sqrt(1-y*y),t=ga*i;
+    pts.push({x:Math.cos(t)*r*RAIO,y:y*RAIO,z:Math.sin(t)*r*RAIO});
+  }
+  function resize(){
+    dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;
+    c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    amb=[];for(var i=0;i<AMBIENTE;i++)amb.push({x:Math.random()*W,y:Math.random()*H,z:Math.random(),vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15});
+    draw();
+  }
+  addEventListener('resize',resize);
+  addEventListener('mousemove',function(e){tx=(e.clientX/W-.5);ty=(e.clientY/H-.5)});
+  addEventListener('scroll',function(){scroll=scrollY},{passive:true});
+  function draw(){
+    x.clearRect(0,0,W,H);
+    var wide=W>800,s=wide?1:.62;
+    cx=wide?W*.7:W*.5; cy=H*.42-scroll*.15;
+    var fade=Math.max(.28,1-scroll/900);
+    mx+=(tx-mx)*.04;my+=(ty-my)*.04;
+    if(!reduce){ay+=.0025+scroll*.000003;}
+    var yaw=ay+mx*1.2,pitch=ax+my*.8+scroll*.0006;
+    var cyw=Math.cos(yaw),syw=Math.sin(yaw),cp=Math.cos(pitch),sp=Math.sin(pitch),proj=[];
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i],x1=p.x*cyw+p.z*syw,z1=-p.x*syw+p.z*cyw,y1=p.y*cp-z1*sp,z2=p.y*sp+z1*cp;
+      var f=700/(700+z2*s),q={X:cx+x1*f*s,Y:cy+y1*f*s,z:z2,f:f,x3:x1,y3:y1,z3:z2};
+      proj.push(q);
+    }
+    x.lineWidth=1;
+    var L2=LIGACAO*LIGACAO;
+    for(var a=0;a<proj.length;a++)for(var b=a+1;b<proj.length;b++){
+      var A=proj[a],B=proj[b],dx=A.x3-B.x3,dy=A.y3-B.y3,dz=A.z3-B.z3,d=dx*dx+dy*dy+dz*dz;
+      if(d<L2){
+        var al=(1-d/L2)*.35*fade*((A.z+B.z)/(2*RAIO)*.5+.6);
+        x.strokeStyle='rgba(139,124,255,'+Math.max(al,0)+')';
+        x.beginPath();x.moveTo(A.X,A.Y);x.lineTo(B.X,B.Y);x.stroke();
+      }
+    }
+    for(var k=0;k<proj.length;k++){
+      var P=proj[k],dep=(P.z/RAIO+1)/2;
+      x.fillStyle=k%7==0?'rgba(61,224,255,'+(.4+dep*.6)*fade+')':'rgba(220,224,255,'+(.25+dep*.65)*fade+')';
+      x.beginPath();x.arc(P.X,P.Y,(1+dep*1.8)*P.f*s,0,6.283);x.fill();
+    }
+    for(var m=0;m<amb.length;m++){
+      var o=amb[m];
+      if(!reduce){o.x+=o.vx-mx*o.z*.4;o.y+=o.vy-my*o.z*.4;
+        if(o.x<0)o.x=W;if(o.x>W)o.x=0;if(o.y<0)o.y=H;if(o.y>H)o.y=0;}
+      x.fillStyle='rgba(180,190,255,'+(.15+o.z*.35)+')';
+      x.beginPath();x.arc(o.x,o.y,.6+o.z*1.4,0,6.283);x.fill();
+    }
+    if(!reduce&&!document.hidden)requestAnimationFrame(draw);
+  }
+  document.addEventListener('visibilitychange',function(){if(!document.hidden&&!reduce)requestAnimationFrame(draw)});
+  resize();
+  if(!reduce)requestAnimationFrame(draw);
+})();
+
+/* ===== INCLINAÇÃO 3D NOS CARDS ===== */
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&matchMedia('(hover:hover)').matches){
+  document.querySelectorAll('.card').forEach(function(el){
+    el.addEventListener('mousemove',function(e){
+      var b=el.getBoundingClientRect(),px=(e.clientX-b.left)/b.width-.5,py=(e.clientY-b.top)/b.height-.5;
+      el.style.transform='rotateX('+(-py*8)+'deg) rotateY('+(px*10)+'deg) translateZ(6px)';
+    });
+    el.addEventListener('mouseleave',function(){el.style.transform=''});
+  });
 }
-[Cardápio
-    [Bebidas
-        [Refrigerantes
-            [Coca-Cola]
-            [Guaraná]
-        ]
-        [Sucos
-            [Suco de Laranja]
-        ]
-    ]
-    [Lanches
-        [Hambúrgueres
-            [X-Burguer]
-        ]
-        [Porções
-            [Batata Frita]
-        ]
-    ]
-]
-\end{forest}
-\end{center}
-
-\subsection{c) Menu de configurações de um celular}
-
-As configurações de um celular podem ser organizadas em
-categorias e opções, permitindo que o usuário encontre
-rapidamente o recurso desejado.
-
-\begin{center}
-\begin{forest}
-for tree={
-    draw,
-    rounded corners,
-    align=center,
-    parent anchor=south,
-    child anchor=north,
-    edge={-},
-    l sep=10mm,
-    s sep=5mm,
-    font=\small
-}
-[Configurações
-    [Conexões
-        [Wi-Fi]
-        [Bluetooth]
-    ]
-    [Sistema
-        [Idioma]
-        [Atualização]
-    ]
-    [Segurança
-        [Senha]
-        [Biometria]
-    ]
-]
-\end{forest}
-\end{center}
-
-\subsection{d) Árvore genealógica simplificada}
-
-Uma árvore genealógica representa as relações familiares
-entre uma pessoa, seus filhos e seus descendentes.
-
-\begin{center}
-\begin{forest}
-for tree={
-    draw,
-    rounded corners,
-    align=center,
-    parent anchor=south,
-    child anchor=north,
-    edge={-},
-    l sep=10mm,
-    s sep=5mm,
-    font=\small
-}
-[Avô
-    [Filho 1
-        [Neto 1]
-        [Neto 2]
-    ]
-    [Filho 2
-        [Neto 3
-            [Bisneto 1]
-        ]
-        [Neto 4]
-    ]
-]
-\end{forest}
-\end{center}
-
-\subsection{e) Estrutura de páginas de um site}
-
-Um site pode apresentar uma página inicial que contém
-seções e subseções, organizando o conteúdo de maneira
-hierárquica.
-
-\begin{center}
-\begin{forest}
-for tree={
-    draw,
-    rounded corners,
-    align=center,
-    parent anchor=south,
-    child anchor=north,
-    edge={-},
-    l sep=10mm,
-    s sep=5mm,
-    font=\small
-}
-[Página Inicial
-    [Sobre Nós
-        [História]
-        [Equipe]
-    ]
-    [Produtos
-        [Eletrônicos]
-        [Acessórios]
-    ]
-    [Contato
-        [Formulário]
-        [Localização]
-    ]
-]
-\end{forest}
-\end{center}
-
-\section*{Conclusão}
-
-A estrutura de árvore permite representar informações
-de forma hierárquica, mostrando as relações entre os
-elementos. Ela pode ser aplicada à organização de arquivos,
-empresas, cardápios digitais, configurações de dispositivos,
-árvores genealógicas e páginas de sites. Essa estrutura
-facilita a organização, a localização e a compreensão
-das informações.
-
-\end{document}
+</script>
+</body>
+</html>
