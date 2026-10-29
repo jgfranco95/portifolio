@@ -1,0 +1,323 @@
+
+\documentclass[12pt,a4paper]{article}
+
+% Pacotes
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{forest}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+% Configurações da página
+\geometry{
+    left=3cm,
+    right=2cm,
+    top=3cm,
+    bottom=2cm
+}
+
+\onehalfspacing
+\setlength{\parindent}{1.25cm}
+\setlength{\parskip}{4pt}
+
+\titleformat{\section}
+{\normalfont\bfseries\large}{\thesection.}{0.5em}{}
+
+\begin{document}
+
+% Capa
+\begin{titlepage}
+    \begin{center}
+        \textbf{FACULDADE / INSTITUIÇÃO DE ENSINO}
+
+        \vspace{3cm}
+
+        \textbf{\large ESTRUTURA DE DADOS}
+
+        \vspace{0.5cm}
+
+        \textbf{4º BIMESTRE -- ATIVIDADE 1}
+
+        \vspace{3cm}
+
+        \begin{flushleft}
+            \textbf{Aluno:} \hrulefill
+
+            \vspace{0.7cm}
+
+            \textbf{Professor(a):} \hrulefill
+
+            \vspace{0.7cm}
+
+            \textbf{Turma:} \hrulefill
+        \end{flushleft}
+
+        \vfill
+
+        Tatuí -- SP
+
+        \the\year
+    \end{center}
+\end{titlepage}
+
+\section{Situação-problema: como organizar os arquivos de um computador?}
+
+A organização dos arquivos de um computador pode ser
+representada por meio de uma estrutura de árvore, na qual
+existe uma pasta principal que contém outras pastas e
+arquivos. Cada pasta pode possuir subpastas, formando uma
+hierarquia que facilita a localização e a organização dos
+arquivos. Dessa forma, é possível identificar quais pastas
+estão dentro de outras e onde cada arquivo está armazenado.
+
+\section{Questionário}
+
+\begin{enumerate}[label=\alph*)]
+
+    \item Uma lista simples de nomes seria suficiente para
+    mostrar em qual pasta cada arquivo está? O que ficaria
+    faltando?
+
+    Não. Uma lista simples mostraria apenas os nomes dos
+    arquivos e das pastas, mas não apresentaria as relações
+    entre eles. Faltariam informações sobre a localização
+    de cada arquivo e sobre quais pastas estão dentro de
+    outras.
+
+    \item Se ``Disciplinas'' está dentro de ``ADS'', e
+    ``ADS'' está dentro de ``Faculdade'', como podemos
+    representar essa relação?
+
+    Podemos representar essa relação por meio de uma
+    estrutura de árvore, mostrando a hierarquia:
+    Faculdade $\rightarrow$ ADS $\rightarrow$ Disciplinas.
+
+    \item Uma pasta pode conter várias pastas? Uma pasta
+    pode estar diretamente dentro de duas pastas diferentes
+    ao mesmo tempo?
+
+    Sim, uma pasta pode conter várias subpastas. Porém,
+    em uma estrutura de árvore tradicional, uma pasta não
+    pode estar diretamente dentro de duas pastas diferentes
+    ao mesmo tempo, pois cada elemento possui apenas um
+    pai, com exceção da raiz.
+
+    \item Qual é a diferença entre dizer que duas pastas
+    existem e mostrar a relação entre elas?
+
+    Dizer que duas pastas existem apenas informa seus nomes.
+    Mostrar a relação entre elas indica como estão
+    organizadas, por exemplo, se uma pasta está dentro da
+    outra ou se ambas pertencem a uma mesma pasta principal.
+
+    \item Se eu mover uma pasta, quais informações sobre a
+    organização precisam ser atualizadas?
+
+    É necessário atualizar a localização da pasta e de seus
+    arquivos e subpastas, além das relações hierárquicas
+    entre a pasta movida e suas pastas de origem e destino.
+    Também podem precisar de atualização os caminhos
+    utilizados para acessar os arquivos.
+
+\end{enumerate}
+
+\section{Analogias e diagramas}
+
+\subsection{a) Organização de uma empresa}
+
+Uma empresa pode ser organizada em uma hierarquia na qual
+a empresa é o elemento principal, seguida pelos
+departamentos, equipes e funcionários.
+
+\begin{center}
+\begin{forest}
+for tree={
+    draw,
+    rounded corners,
+    align=center,
+    parent anchor=south,
+    child anchor=north,
+    edge={-},
+    l sep=10mm,
+    s sep=5mm,
+    font=\small
+}
+[Empresa
+    [Departamento de TI
+        [Equipe de Suporte
+            [João]
+            [Pedro]
+        ]
+        [Equipe de Desenvolvimento
+            [Maria]
+        ]
+    ]
+    [Departamento Financeiro
+        [Equipe de Contabilidade
+            [Ana]
+        ]
+    ]
+]
+\end{forest}
+\end{center}
+
+\subsection{b) Cardápio digital}
+
+Um cardápio digital pode organizar os produtos por
+categorias e subcategorias, facilitando a localização
+dos itens disponíveis.
+
+\begin{center}
+\begin{forest}
+for tree={
+    draw,
+    rounded corners,
+    align=center,
+    parent anchor=south,
+    child anchor=north,
+    edge={-},
+    l sep=10mm,
+    s sep=5mm,
+    font=\small
+}
+[Cardápio
+    [Bebidas
+        [Refrigerantes
+            [Coca-Cola]
+            [Guaraná]
+        ]
+        [Sucos
+            [Suco de Laranja]
+        ]
+    ]
+    [Lanches
+        [Hambúrgueres
+            [X-Burguer]
+        ]
+        [Porções
+            [Batata Frita]
+        ]
+    ]
+]
+\end{forest}
+\end{center}
+
+\subsection{c) Menu de configurações de um celular}
+
+As configurações de um celular podem ser organizadas em
+categorias e opções, permitindo que o usuário encontre
+rapidamente o recurso desejado.
+
+\begin{center}
+\begin{forest}
+for tree={
+    draw,
+    rounded corners,
+    align=center,
+    parent anchor=south,
+    child anchor=north,
+    edge={-},
+    l sep=10mm,
+    s sep=5mm,
+    font=\small
+}
+[Configurações
+    [Conexões
+        [Wi-Fi]
+        [Bluetooth]
+    ]
+    [Sistema
+        [Idioma]
+        [Atualização]
+    ]
+    [Segurança
+        [Senha]
+        [Biometria]
+    ]
+]
+\end{forest}
+\end{center}
+
+\subsection{d) Árvore genealógica simplificada}
+
+Uma árvore genealógica representa as relações familiares
+entre uma pessoa, seus filhos e seus descendentes.
+
+\begin{center}
+\begin{forest}
+for tree={
+    draw,
+    rounded corners,
+    align=center,
+    parent anchor=south,
+    child anchor=north,
+    edge={-},
+    l sep=10mm,
+    s sep=5mm,
+    font=\small
+}
+[Avô
+    [Filho 1
+        [Neto 1]
+        [Neto 2]
+    ]
+    [Filho 2
+        [Neto 3
+            [Bisneto 1]
+        ]
+        [Neto 4]
+    ]
+]
+\end{forest}
+\end{center}
+
+\subsection{e) Estrutura de páginas de um site}
+
+Um site pode apresentar uma página inicial que contém
+seções e subseções, organizando o conteúdo de maneira
+hierárquica.
+
+\begin{center}
+\begin{forest}
+for tree={
+    draw,
+    rounded corners,
+    align=center,
+    parent anchor=south,
+    child anchor=north,
+    edge={-},
+    l sep=10mm,
+    s sep=5mm,
+    font=\small
+}
+[Página Inicial
+    [Sobre Nós
+        [História]
+        [Equipe]
+    ]
+    [Produtos
+        [Eletrônicos]
+        [Acessórios]
+    ]
+    [Contato
+        [Formulário]
+        [Localização]
+    ]
+]
+\end{forest}
+\end{center}
+
+\section*{Conclusão}
+
+A estrutura de árvore permite representar informações
+de forma hierárquica, mostrando as relações entre os
+elementos. Ela pode ser aplicada à organização de arquivos,
+empresas, cardápios digitais, configurações de dispositivos,
+árvores genealógicas e páginas de sites. Essa estrutura
+facilita a organização, a localização e a compreensão
+das informações.
+
+\end{document}
